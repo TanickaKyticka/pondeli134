@@ -1,5 +1,8 @@
+from dataclasses import field
 from pathlib import Path
 import json
+
+from pondeli134.generators import dna_sequence
 
 
 def read_data(file_name, field):
@@ -19,7 +22,7 @@ def read_data(file_name, field):
     """
     # get current working directory path
     cwd_path = Path.cwd()
-    
+
     file_path = cwd_path / file_name
 
 
@@ -29,3 +32,19 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+#ukol1
+def read_data(file_name, field):
+    with open(file_name, "r", encoding="utf-8"):
+        data = json.load(file_name)
+    if field == "dna_sequence":
+        return str(data)
+    elif field == "ordered_numbers":
+        return list(data)
+    elif field == "unordered_numbers":
+        return list(data)
+    else:
+        return None
+
+#ukol2
+
