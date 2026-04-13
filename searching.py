@@ -34,17 +34,33 @@ if __name__ == "__main__":
     main()
 
 #ukol1
-def read_data(file_name, field):
-    with open(file_name, "r", encoding="utf-8"):
-        data = json.load(file_name)
-    if field == "dna_sequence":
-        return str(data)
-    elif field == "ordered_numbers":
-        return list(data)
-    elif field == "unordered_numbers":
-        return list(data)
-    else:
+import json
+
+
+def read_data(filename, field):
+    try:
+        with open(filename, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        if field not in data:
+            return None
+
+        return data[field]
+
+    except (FileNotFoundError, json.JSONDecodeError):
         return None
 
 #ukol2
+def linear_search(sequence, target):
+    positions = []
 
+    for index, value in enumerate(sequence):
+        if value == target:
+            positions.append(index)
+
+    result = {
+        "positions": positions,
+        "count": len(positions)
+    }
+
+    return result
