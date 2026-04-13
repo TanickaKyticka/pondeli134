@@ -2,7 +2,7 @@ from dataclasses import field
 from pathlib import Path
 import json
 
-from pondeli134.generators import dna_sequence
+#from pondeli134.generators import dna_sequence
 
 
 def read_data(file_name, field):
@@ -67,18 +67,18 @@ def linear_search(sequence, target):
 
 #ukol3
 def binary_search(sequence, target):
-    left = 0
-    right = len(sequence) - 1
+    levacka = 0
+    pravacka = len(sequence) - 1
 
-    while left <= right:
-        mid = (left + right) // 2
+    while levacka <= pravacka:
+        mid = (levacka + pravacka) // 2
 
         if sequence[mid] == target:
             return mid
         elif sequence[mid] < target:
-            left = mid + 1
+            levacka = mid + 1
         else:
-            right = mid - 1
+            pravacka = mid - 1
 
     return None
 
