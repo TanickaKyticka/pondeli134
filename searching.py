@@ -26,13 +26,6 @@ def read_data(file_name, field):
     file_path = cwd_path / file_name
 
 
-def main():
-    pass
-
-
-if __name__ == "__main__":
-    main()
-
 #ukol1
 import json
 
@@ -82,3 +75,72 @@ def binary_search(sequence, target):
 
     return None
 
+import matplotlib.pyplot as plt
+
+# sizes = [100, 500, 1000, 5000, 10000]
+# times = [0.00001, 0.00003, 0.00006, 0.00031, 0.00067]
+#
+# plt.plot(sizes, times)
+
+# plt.xlabel("Velikost vstupu")
+# plt.ylabel("Čas [s]")
+# plt.title("Ukázkový graf měření")
+# plt.show()
+
+
+#ukolmerenicasu
+import random
+import time
+
+def generate_data(size):
+    data = [random.randint(0, size) for _ in range(size)]
+    return data
+
+def main():
+    sizes = [100, 500, 1000, 5000, 10000]
+
+    linear_times = []
+    binary_times = []
+    set_times = []
+
+    target = -1
+    repeats = 50
+
+    for size in sizes:
+        data = generate_data(size)
+        sorted_data = sorted(data)
+        data_set = set(data)
+
+        start = time.time()
+        for _ in range(repeats):
+            linear_search(data, target)
+        end = time.time()
+        linear_times.append((end - start) / repeats)
+
+        start = time.time()
+        for _ in range(repeats):
+            binary_search(sorted_data, target)
+        end = time.time()
+        binary_times.append((end - start) / repeats)
+
+        start = time.time()
+        for _ in range(repeats):
+            target in data_set
+        end = time.time()
+        set_times.append((end - start) / repeats)
+
+    plt.figure()
+
+    plt.plot(sizes, linear_times, label="Linear Search")
+    plt.plot(sizes, binary_times, label="Binary Search")
+    plt.plot(sizes, set_times, label="Set Membership")
+
+    plt.xlabel("velikost vstupu")
+    plt.ylabel("cas (s)")
+    plt.title("porovnavani algoritmu")
+    plt.legend()
+
+    plt.show()
+
+if __name__ == "__main__":
+    main()
